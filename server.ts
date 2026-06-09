@@ -17,7 +17,7 @@ const PORT = 3000;
 
 app.use(express.json());
 
-// MongoDB Mongoose Schemas (Used when MONGO_URI is active)
+// MongoDB Mongoose Schemas
 const UserSchema = new mongoose.Schema({
   fullName: { type: String, required: true },
 
@@ -81,11 +81,9 @@ if (mongoUri && mongoUri !== 'YOUR_MONGODB_URI_HERE') {
   mongoDisconnectReason = 'MONGO_URI not configured in .env';
 }
 
-// ----------------------
-// BACKEND API ENDPOINTS
-// ----------------------
+// Backend API Endpoints
 
-// 0. Get DB Connection and Fallback Status
+// Get DB Connection and Fallback Status
 app.get('/api/db-status', (req, res) => {
   res.json({
     connected: isMongoConnected,
@@ -94,17 +92,17 @@ app.get('/api/db-status', (req, res) => {
   });
 });
 
-// 1. Get Logged in User session check (mocked cookie-less context check)
+// Get Logged in User session check
 app.get('/api/me', (req, res) => {
   res.json({ user: null });
 });
 
-// 2. Clear user session/cookies
+// Clear user session
 app.post('/api/logout', (req, res) => {
   res.json({ success: true, message: 'Logged out successfully' });
 });
 
-// 3. Register a brand new PopX user
+// Register
 app.post('/api/signup', async (req, res) => {
   try {
     const {
@@ -196,7 +194,7 @@ app.post('/api/signup', async (req, res) => {
   }
 });
 
-// 4. Log into a PopX Account
+// Login
 app.post('/api/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -214,8 +212,7 @@ app.post('/api/login', async (req, res) => {
       });
     }
 
-    const normalizedEmail =
-      email.toLowerCase().trim();
+    const normalizedEmail = email.toLowerCase().trim();
 
     const userDoc =
       await UserModel.findOne({
@@ -229,11 +226,7 @@ app.post('/api/login', async (req, res) => {
       });
     }
 
-    const isValidPassword =
-      await bcrypt.compare(
-        password,
-        userDoc.password
-      );
+    const isValidPassword = await bcrypt.compare(password,userDoc.password);
 
     if (!isValidPassword) {
       return res.status(401).json({
@@ -270,9 +263,7 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-// ----------------------
-// VITE OR STATIC SERVING
-// ----------------------
+// Vite or Static Serving
 
 async function startServer() {
   if (process.env.NODE_ENV !== 'production') {
