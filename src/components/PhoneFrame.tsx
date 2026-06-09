@@ -36,7 +36,7 @@ export const PhoneFrame: React.FC<PhoneFrameProps> = ({ children }) => {
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-[#6C25FF]/10 rounded-full blur-3xl pointer-events-none hidden lg:block" />
 
       {/* Main outer smartphone frame */}
-      <div className="relative w-full max-w-[375px] h-[812px] bg-white rounded-[44px] shadow-[0_25px_60px_-15px_rgba(108,37,255,0.15)] ring-12 ring-slate-900/10 flex flex-col overflow-hidden transition-all duration-300 md:scale-100 scale-95 origin-center">
+      <div className="relative w-full max-w-[375px] h-[97vh] bg-white rounded-[44px] shadow-[0_25px_60px_-15px_rgba(108,37,255,0.15)] ring-12 ring-slate-900/10 flex flex-col overflow-hidden transition-all duration-300 md:scale-100 scale-95 origin-center">
         
         {/* Dynamic Island / Speaker Notch Wrapper */}
         <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[110px] h-[24px] bg-[#1D2226] rounded-b-[18px] z-50 flex items-center justify-center">
@@ -58,7 +58,7 @@ export const PhoneFrame: React.FC<PhoneFrameProps> = ({ children }) => {
         </div>
 
         {/* Screen canvas */}
-        <div className="flex-1 w-full bg-[#F7F8F9] overflow-hidden relative flex flex-col no-scrollbar">
+        <div className="flex-1 w-full bg-[#F7F8F9] overflow-y-auto relative flex flex-col no-scrollbar">
           {children}
         </div>
 
